@@ -3,10 +3,16 @@ package com.example.mymovie2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.item_recycler.*
 import kotlinx.android.synthetic.main.main.*
 import kotlinx.android.synthetic.main.review.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     var totalUpCount: Int = 15
     var totalDownCount: Int = 1
@@ -17,6 +23,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewManager = LinearLayoutManager(this)
+
+        recyclerView = findViewById<RecyclerView>(R.id.recyclerView).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+        }
 
         // 초기 세팅
         when (cheakSelect) {
